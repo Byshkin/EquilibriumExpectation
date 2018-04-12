@@ -9,7 +9,7 @@ Here Lugano.txt is a binary image in text format (genarated with ImageJ program)
 
 For this data with 3006 x 4800 points Maximum Likelihood estimation took 2 minutes on MAC PRO
 
-First 1-step Contrastive divergance is computed. Then MLE.
+First 1-step Contrastive Divergance is computed. Then MLE.
 
 Output is written to files parameters.out, statistics.out
 
