@@ -80,13 +80,15 @@ for(i=0;i<100000;i++) {
  fprintf(par_file, "%s acc\n", hat);
 if(mean_sd_file) fprintf(mean_sd_file, "%s\n", hat);
 
- printf("Contrastive divergence estimates without averaging:\n");
+ printf("1-step Contrastive Divergence (CD-1) estimates without averaging:\n");
  fflush(stdout);
+ double start = (double)clock() /(double) CLOCKS_PER_SEC;
  algorithm_S(Data, Lx, Ly, parameters, Npar,  change_stats_funcs,
                  CDsteps, m_steps,  K_CD, Ki, par_file);
  for(i=0;i<Npar;i++) printf("%g  ", parameters[i]);
  printf("\n");
-
+ double end = (double)clock() / (double) CLOCKS_PER_SEC;
+ printf("CPU time for CD-1 estimation %fs\n", end - start);
 
 //Set the starting values of Ki
 // for (i = 0; i < Npar; i++) Ki[i]=1e-10;
@@ -102,6 +104,7 @@ for (i = 0; i < Npar; i++)
   free(Dervi);
 
 printf("Computing MLE by EE algorithm. See progress in output files\n");
+start = (double)clock() /(double) CLOCKS_PER_SEC;
 double Res[Npar];
 //Here statistics are difference between actual statistics and statistics in empirical data 
 for(i=0;i<Npar;i++) SumChangeStats[i]=0;
@@ -113,9 +116,11 @@ EE_algorithm(Data, Lx, Ly, parameters, Npar,change_stats_funcs,
                    m_steps,   c2, M_steps, m2_steps, Ki, p2,  c1,
 		   par_file,  stat_file, mean_sd_file, SumChangeStats, Res, M_steps*m2_steps);
 
+end = (double)clock() / (double) CLOCKS_PER_SEC;
 printf("Results of Maximum Likelihood estimation:\n");
 for(i=0;i<Npar;i++) printf("%g  ", Res[i]);
 printf("\n");
+printf("CPU time fro MLE %fs\n", end - start);
 fflush(stdout);
 printf("The convergence test was suggested in Byshkin et al,\n"); 
 printf("Fast Maximum Likelihood estimation via Equilibrium Expectation for Large Network Data \n");

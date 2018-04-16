@@ -44,7 +44,7 @@ for(ind=0;ind<Nparameters;ind++)
 	Dervi[ind]+=der;
         Dervi[ind]*=0.5;
 }
-printf("\n");
+//printf("\n");
 free(SumChangeStats);
 }
 
