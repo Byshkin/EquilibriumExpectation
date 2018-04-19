@@ -10,6 +10,7 @@
 
 #include "headers.h"
 #include "stdlib.h"
+#include "math.h"
 #include <stdio.h>
 #include <string.h>
 //Maximum size of data matrix
@@ -35,7 +36,7 @@ int main(int argc, char *argv[])
  int i,j,k, h;
  int Lx, Ly;
  double parameters[Npar];
- double SumChangeStats[Npar];
+ long double SumChangeStats[Npar];
  double Ki[Npar]; 
  change_stats_func_t* change_stats_funcs[100];
  //Specify model by statitics
@@ -76,7 +77,7 @@ for(i=0;i<100000;i++) {
 
 //mean_sd.out may be used to check if the approoximate equality (A1) holds
  FILE * mean_sd_file=NULL;
-// mean_sd_file=fopen("mean_sd.out","w");
+ mean_sd_file=fopen("mean_sd.out","w");
  fprintf(par_file, "%s acc\n", hat);
 if(mean_sd_file) fprintf(mean_sd_file, "%s\n", hat);
 
@@ -120,7 +121,7 @@ end = (double)clock() / (double) CLOCKS_PER_SEC;
 printf("Results of Maximum Likelihood estimation:\n");
 for(i=0;i<Npar;i++) printf("%g  ", Res[i]);
 printf("\n");
-printf("CPU time fro MLE %fs\n", end - start);
+printf("CPU time for MLE %fs\n", end - start);
 fflush(stdout);
 printf("The convergence test was suggested in Byshkin et al,\n"); 
 printf("Fast Maximum Likelihood estimation via Equilibrium Expectation for Large Network Data \n");
@@ -131,24 +132,38 @@ printf("The statistics of observed data should be in-between %\n");
 //MLE Test.
 //If c2 is zero then paparemter values are not adjusted
 //In this case EE algorithm is equivalent to Metropolis algorithm
-//The eroor of the obtained estimates is smaller than x % if
-//at parameter*(1+x/100) and parameters*(1-x/100) statistics have different sign
 
 /*
-double x=1;
 printf("A test of accuracy is running\n");
-double dp=1+x*0.01;
-for(i=0;i<Npar;i++) parameters[i]=Res[i]/dp;
+//double dp=1+x*0.01;
+double dpv[Npar];
+double dh;
+for(i=0;i<Npar;i++) 
+	{dh=fabs(Res[i]); dpv[i]=dh*0.01;
+	if (dh<c1*2)  dpv[i]=dh*0.1; 
+	//if estimated parameter is close to zero its relative error is larger
+	}
+for(i=0;i<Npar;i++) parameters[i]=Res[i]-dpv[i];
+ readMatrix(argv[1], Lmax, &Ly, &Lx, Data);
+ for(i=0;i<Lx;i++) for(j=0;j<Ly;j++) 
+    {h=Data[i][j]; Data[i][j]=1; if(h) Data[i][j]=-1; }
+for(i=0;i<Npar;i++) SumChangeStats[i]=0;
+
 EE_algorithm(Data, Lx, Ly, parameters, Npar, change_stats_funcs,
-                   m_steps,  0, M_steps, m2_steps, Ki, p2,  c1,
+                   m_steps,  0, M_steps*10, m2_steps, Ki, p2,  c1,
 		   par_file,  stat_file, mean_sd_file, SumChangeStats, Res,2* M_steps*m2_steps);
 
-for(i=0;i<Npar;i++) parameters[i]*=dp*dp;
-EE_algorithm(Data, Lx, Ly, parameters, Npar, change_stats_funcs,
-                   m_steps,  0, M_steps, m2_steps, Ki, p2,  c1,
-		   par_file,  stat_file, mean_sd_file, SumChangeStats, Res,3* M_steps*m2_steps);
+for(i=0;i<Npar;i++) parameters[i]+=2*dpv[i];
+ readMatrix(argv[1], Lmax, &Ly, &Lx, Data);
+ for(i=0;i<Lx;i++) for(j=0;j<Ly;j++) 
+    {h=Data[i][j]; Data[i][j]=1; if(h) Data[i][j]=-1; }
+for(i=0;i<Npar;i++) SumChangeStats[i]=0;
 
+EE_algorithm(Data, Lx, Ly, parameters, Npar, change_stats_funcs,
+                   m_steps,  0, M_steps*10, m2_steps, Ki, p2,  c1,
+		   par_file,  stat_file, mean_sd_file, SumChangeStats, Res,12* M_steps*m2_steps);
 */
+
   for(i=0;i<Lx;i++) free(Data[i]);
   free(Data);
   fclose(stat_file);

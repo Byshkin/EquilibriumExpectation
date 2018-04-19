@@ -32,7 +32,7 @@ return res;
 
 
 double MetropolisSampler(DataType ** Data, int Lx, int  Ly,  double * parameters,int Nparameters,
-    change_stats_func_t *change_stats_funcs[], double * SumChangeStats, int sampler_m, double *Vari, bool CD)
+    change_stats_func_t *change_stats_funcs[], long double * SumChangeStats, int sampler_m, double *Vari, bool CD)
  {
 
   int Naccepted = 0;   

@@ -9,7 +9,7 @@ typedef double (change_stats_func_t)(DataType **, int, int, int, int );
 double IsingChangeField(DataType **Data, int x, int y, int Lx, int Ly);
 double IsingChangeInteraction(DataType **Data, int x, int y, int LX, int Ly);
 double MetropolisSampler(DataType ** Data, int Lx, int Ly,  double * parameters,int Nparameters,
-   change_stats_func_t *change_stats_funcs[],   double * SumChangeStats, int sampler_m, double *Vari, bool CD);
+   change_stats_func_t *change_stats_funcs[], long  double * SumChangeStats, int sampler_m, double *Vari, bool CD);
 
 void algorithm_S(DataType **Data, int Lx, int Ly, double *parameters, int Nparameters,
                  change_stats_func_t *change_stats_funcs[],
@@ -19,7 +19,7 @@ void EE_algorithm(DataType **Data, int Lx, int Ly, double *theta, int Nparameter
                    change_stats_func_t *change_stats_funcs[],
                    int m_steps,  double c2, int Mouer, int m2,
                    double D0[], double p2, double c1,FILE * theta_outfilei,
-		    FILE *dzA_outfile, FILE* mean_sd_file, double * SumChangeStats,
+		    FILE *dzA_outfile, FILE* mean_sd_file, long double * SumChangeStats,
 		    double *Res, int t0);
 
  void Deriviative( int DS, double eps, double *Dervi, DataType **Data, int Lx, int Ly,

@@ -10,7 +10,7 @@ void Deriviative( int DS, double eps, double *Dervi, DataType **Data, int Lx, in
 {
 int i,l,ind;
 double dx;
-double *SumChangeStats = (double *)safe_malloc(Nparameters*sizeof(double));
+long double *SumChangeStats = (long double *)safe_malloc(Nparameters*sizeof(long double));
 //printf("\nForward deriviatives:\n");
 for(ind=0;ind<Nparameters;ind++)
 {

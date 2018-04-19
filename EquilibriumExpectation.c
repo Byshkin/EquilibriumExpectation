@@ -20,7 +20,7 @@ void EE_algorithm(DataType **Data, int Lx, int Ly, double *theta, int Nparameter
                    change_stats_func_t *change_stats_funcs[],
                    int m_steps,  double c2, int Mouter, int m2,
                    double D0[], double p2, double c1,FILE * theta_outfile, FILE *dzA_outfile,
-		   FILE *Kafile, double *dzA,  double *Res, int t0)
+		   FILE *Kafile, long double *dzA, double *Res, int t0)
 {
   int touter, tinner, l;
   int pmn=0;
@@ -51,7 +51,7 @@ void EE_algorithm(DataType **Data, int Lx, int Ly, double *theta, int Nparameter
 
    for (l = 0; l < Nparameters; l++)
     {
-    fprintf(dzA_outfile, "%g ", dzA[l]); 
+    fprintf(dzA_outfile, "%Lg ", dzA[l]); 
     fprintf(theta_outfile, "%g ", theta[l]);
     }
     fprintf(theta_outfile, "%g\n", acceptance_rate);

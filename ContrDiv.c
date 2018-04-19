@@ -20,7 +20,7 @@ void algorithm_S(DataType **Data, int Lx, int Ly, double *parameters, int Nparam
   int t, l;
   double *Vari = (double *)safe_malloc(Nparameters*sizeof(double));
   double *D0 = (double *)safe_malloc(Nparameters* sizeof(double));
-  double *dzA = (double *)safe_malloc(Nparameters*sizeof(double));
+  long double *dzA = (long double *)safe_malloc(Nparameters*sizeof(long double));
   double parameters_change,da, acceptance_rate; 
   /* 1/D0 approximates squared derivatives */  
   for (l = 0; l < Nparameters; l++)    parameters[l] = 0;
