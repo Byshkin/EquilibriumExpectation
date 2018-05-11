@@ -32,13 +32,13 @@ return res;
 
 
 double MetropolisSampler(DataType ** Data, int Lx, int  Ly,  double * parameters,int Nparameters,
-    change_stats_func_t *change_stats_funcs[], long double * SumChangeStats, int sampler_m, double *Vari, bool CD)
+    change_stats_func_t *change_stats_funcs[], long double * SumChangeStats, int sampler_m, double *Vari, boolean CD)
  {
 
   int Naccepted = 0;   
   double energy_change;
   int k,l;
-  bool   ONE,OLD;
+  boolean   ONE,OLD;
   double *changestats = (double *)safe_malloc(Nparameters*sizeof(double));
   double *changestatsM;//changes of statistics to compute variance
   if (Vari) changestatsM = (double *) safe_malloc(Nparameters*sampler_m*sizeof(double));
@@ -61,7 +61,7 @@ double MetropolisSampler(DataType ** Data, int Lx, int  Ly,  double * parameters
     }
    //compute Metropolis-Hastings acceptance probability
    double AccProb= exp(energy_change);
-   bool ACC=(urand()<AccProb);
+   boolean ACC=(urand()<AccProb);
     if (ACC) { //move accepted
       Naccepted++;      
       if (!ONE)     Data[x][y]=1;

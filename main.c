@@ -49,8 +49,8 @@ int main(int argc, char *argv[])
  for (i = 0; i < Npar; i++)
      snprintf(hat+strlen(hat), 1000,"par%i  ", i+1 ); 
  fprintf(stat_file, "%s\n", hat);
- DataType **Data=safe_malloc(Lmax*sizeof(DataType*));
- for(i=0;i<Lmax;i++) Data[i]=safe_malloc(Lmax*sizeof(DataType));
+ DataType **Data=(DataType**)safe_malloc(Lmax*sizeof(DataType*));
+ for(i=0;i<Lmax;i++) Data[i]=(DataType*)safe_malloc(Lmax*sizeof(DataType));
 
 //Load empirial data to study
  Lx=Ly=1000;

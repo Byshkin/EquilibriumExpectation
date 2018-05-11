@@ -98,7 +98,7 @@ int readMatrix(char *infile, int Lmax, int *Lx, int *Ly, DataType ** Data ) {
     int numberOfNumbs=0,value, valsRead;
     float average;
     char  *val;
-    char *line=safe_malloc(SIZE*sizeof(char));
+    char *line=(char*)safe_malloc(SIZE*sizeof(char));
     char delims[] = " \t\r\n";
    int i=0;  
    while(fgets(line, SIZE, file) != NULL)
