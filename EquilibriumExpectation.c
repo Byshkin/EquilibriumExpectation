@@ -26,7 +26,7 @@ void EE_algorithm(DataType **Data, int Lx, int Ly, double *theta, int Nparameter
   int pmn=0;
   double acceptance_rate;
   double theta_mean, theta_sd;
-  long double *parmean=safe_malloc(Nparameters*sizeof(long double));
+  long double *parmean=(long double *)safe_malloc(Nparameters*sizeof(long double));
   double *theta_step = (double *)safe_malloc(Nparameters*sizeof(double));
   double **thetamatrix = (double **)safe_malloc(Nparameters*sizeof(double *));
   for (l = 0; l < Nparameters; l++)
