@@ -1,4 +1,4 @@
-# Appication of the Equilibrium Expectation algorithm to the Ising model
+# Appication of the EE algorithm to the Ising model
 
 Compile by any C compiler, e.g.
 gcc -o IsingEE  main.c Metropolis.c ContrDiv.c EquilibriumExpectation.c utils.c FinDif.c
