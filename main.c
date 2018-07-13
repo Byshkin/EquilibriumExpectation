@@ -26,7 +26,7 @@ const int M_steps=5000; // Number of steps of EE algorithm. Large enough to see 
 const int m2_steps=100; // From 50 to 1000. SD(parameters) is computed over m2_steps values
 const double K0=1e-5;   // A constant to initialize learning rate Ki. If zero then Ki=10^-10    
 const double c1=0.01;   // A small positive constant to avoid problems related to zero parameters
-const double c2=0.001;  // From 0.00001 to 0.1. Learding rate is adapted to that SD(parameters)/mean(parameters)=c2
+const double c2=0.001;  // From 0.00001 to 0.1. Learning rate is adapted to that SD(parameters)/mean(parameters)=c2
 const double p2=0.5;    // From 0.1 to 1
 int main(int argc, char *argv[])
 {
