@@ -20,14 +20,14 @@ const int Npar=1;
 //Constants of Contrastive Divergance algorithm
 const double K_CD= 0.01;
 const int CDsteps=5000;
-const int m_steps=1000;
+const int m_steps=1000; //from 100 to 10000
 //Constants of EE algorithm
-const int M_steps=4000;
-const int m2_steps=100;
-const double K0=1e-5;
-const double c1=0.01;
-const double c2=0.001;
-const double p2=0.5;
+const int M_steps=4000; // Number of steps of EE algorithm. Large enough to see convergance
+const int m2_steps=100; // From 50 to 1000. SD(parameters) is compute over m2_steps values
+const double K0=1e-5;   // A constant to initialize learning rate Ki. If zero then Ki=10^-10    
+const double c1=0.01;   // A small positive constant to avoid problems related to zero parameters
+const double c2=0.001;  // From 0.00001 to 0.1. Learding rate is adapted to that SD(parameters)/mean(parameters)=c2
+const double p2=0.5;    // From 0.1 to 1
 int main(int argc, char *argv[])
 {
  printf("A demonstration of the Equilibrium Expectation algorithm\n");
@@ -92,8 +92,9 @@ if(mean_sd_file) fprintf(mean_sd_file, "%s\n", hat);
  printf("CPU time for CD-1 estimation %fs\n", end - start);
 
 //Set the starting values of Ki
-// for (i = 0; i < Npar; i++) Ki[i]=1e-10;
+ for (i = 0; i < Npar; i++) Ki[i]=1e-10;
  //A more robust approach is to compute deriviatives, as below
+if (K0!=0) {
 double *Dervi = (double *)safe_malloc(Npar*sizeof(double));
  Deriviative( 10, 1.0, Dervi, Data, Lx, Ly, Npar, 
 		change_stats_funcs, parameters, m_steps);
@@ -103,7 +104,8 @@ for (i = 0; i < Npar; i++)
    //printf("%g   \n", Ki[i]);
   }
   free(Dervi);
-
+ }
+//
 printf("Computing MLE by EE algorithm. See progress in output files\n");
 start = (double)clock() /(double) CLOCKS_PER_SEC;
 double Res[Npar];

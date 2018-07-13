@@ -35,7 +35,7 @@ for(ind=0;ind<Nparameters;ind++)
 	for(i=0;i<DS;i++)
 	{
 	int acceptance_rate =MetropolisSampler(Data, Lx, Ly, parameters, Nparameters,
-	change_stats_funcs, SumChangeStats, sampler_m, NULL, FALSE);
+	change_stats_funcs, SumChangeStats, sampler_m, NULL, TRUE);
 	dx+=SumChangeStats[ind];
 	}	
 	parameters[ind]+=eps;
