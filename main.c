@@ -142,7 +142,7 @@ double dpv[Npar];
 double dh;
 for(i=0;i<Npar;i++) 
 	{dh=fabs(Res[i]); dpv[i]=dh*0.01;
-	if (dh<c1*2)  dpv[i]=dh*0.1; 
+	if (dh<c1)  dpv[i]=c1*0.01; 
 	//if estimated parameter is close to zero its relative error is larger
 	}
 for(i=0;i<Npar;i++) parameters[i]=Res[i]-dpv[i];
