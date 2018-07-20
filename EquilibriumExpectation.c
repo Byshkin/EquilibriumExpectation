@@ -64,7 +64,7 @@ void EE_algorithm(DataType **Data, int Lx, int Ly, double *theta, int Nparameter
       // force minimum magnitude to stop theta sticking at zero 
       if (fabs(theta_mean) < c1)  theta_mean = c1;
       if(Kafile) fprintf(Kafile, "%g ", theta_sd / fabs(theta_mean));
-      D0[l] *= pow(c2 / (theta_sd / fabs(theta_mean)),p2);
+      if(fabs(theta_mean)>1e-10) D0[l] *=  pow(c2 / (theta_sd / fabs(theta_mean)),p2);
     }
       if(Kafile) { fprintf(Kafile, "\n"); fflush(Kafile);  } 
       fflush(dzA_outfile);
