@@ -41,8 +41,15 @@ void EE_algorithm(DataType **Data, int Lx, int Ly, double *theta, int Nparameter
  	acceptance_rate= MetropolisSampler(Data, Lx,Ly,  theta, Nparameters,
           change_stats_funcs, dzA, m_steps, NULL, FALSE);    
       for (l = 0; l < Nparameters; l++) {
+	//The following parameter updating step was suggested in Byshkin et al, Fast Maximum Likelihood estimation 
+	//      via Equilibrium Expectation for Large Network Data, Scientific Reports 8:11509 (2018)  
         theta_step[l] = (dzA[l] < 0 ? 1 : -1) * D0[l] * dzA[l]*dzA[l];
-
+        //The following parameter updating step was suggested in Alexander Borisenko, Maksym Byshkin, Alessandro Lomi,
+	//A Simple Algorithm for Scalable Monte Carlo Inference arXiv preprint arXiv:1901.00533 (2019)      
+	double dtheta=fabs(theta[l]); if(dtheta<c1) dtheta=c1;
+        theta_step[l] = (dzA[l] < 0 ? 1 : -1) * dtheta*c2*0.1;
+	if(fabs(dzA[l]<1e-10) theta_step[l]=0;        
+	      
         if(c2!=0) theta[l] += theta_step[l];
         thetamatrix[l][tinner] = theta[l];
       }
