@@ -48,7 +48,7 @@ void EE_algorithm(DataType **Data, int Lx, int Ly, double *theta, int Nparameter
 	//A Simple Algorithm for Scalable Monte Carlo Inference arXiv preprint arXiv:1901.00533 (2019)      
 	double dtheta=fabs(theta[l]); if(dtheta<c1) dtheta=c1;
         theta_step[l] = (dzA[l] < 0 ? 1 : -1) * dtheta*c2*0.1;
-	if(fabs(dzA[l]<1e-10) theta_step[l]=0;        
+	if(fabs(dzA[l]<1e-10)) theta_step[l]=0;        
 	      
         if(c2!=0) theta[l] += theta_step[l];
         thetamatrix[l][tinner] = theta[l];
