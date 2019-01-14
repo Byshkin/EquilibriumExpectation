@@ -18,7 +18,9 @@ parameters.out contains values of parameters as a function of step t
 statistic.out contains values of statistics dz(t).
 
 See the paper Byshkin et al (2018) [Fast Maximum Likelihood Estimation via Equilibrium Expectation for Large Network Data](https://www.nature.com/articles/s41598-018-29725-8). *Scientific Reports* 8:11509. 
+
 Alexander Borisenko, Maksym Byshkin, Alessandro Lomi, [A Simple Algorithm for Scalable Monte Carlo Inference](https://arxiv.org/abs/1901.00533) arXiv preprint arXiv:1901.00533 (2019)
+
 and the presentation slides at www.estimnet.org 
 
 
